@@ -1,8 +1,8 @@
-from data import get_stats
-
 # -------------------------
 # Presentation Layer
 # -------------------------
+from data import get_stats
+
 def show_result(result, is_first_try):
     if result == "high":
         print("Too High. ❌")
@@ -31,9 +31,7 @@ def show_summary(game_state):
     show_history(game_state)
     show_stats(game_state)
 
-def show_chance(game_state):
-    chance = game_state["max_chance"] - len(game_state["history"])
-
+def show_chance(chance):
     if chance > 1:
         print(f"You have {chance} more chances.")
     elif chance == 1:

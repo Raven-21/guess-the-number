@@ -3,7 +3,11 @@ from data import(
     get_remaining_chance
 )
 
-from logic import check_guess
+from logic import (
+    check_guess,
+    is_win,
+    is_game_over
+)
 
 from ui import(
     show_result,
@@ -36,14 +40,18 @@ def choose_difficulty():
 # -------------------------
 # Input Layer
 # -------------------------
-def get_guess():
-    try:
-        print("-------------------------------------------------")
-        guess = int(input("Guess the number: "))
+def get_valid_guess():
+    while True:
+        try:
+            print("-------------------------------------------------")
+            guess = int(input("Guess the number: "))
+        except ValueError:
+            print("Please enter a valid number!")
+            continue
+        if guess < 1 or guess > 100:
+            print("Please enter a number between 1 and 100!")
+            continue
         return guess
-    except ValueError:
-        print("Please enter a valid number!")
-        return None
 
 # -------------------------
 # Control Layer
@@ -51,6 +59,7 @@ def get_guess():
 def handle_round(guess, game_state):
     # Check guess
     result = check_guess(guess, game_state)
+
     # Check trying to win for the first time
     is_first_try = (len(game_state["history"]) == 0)
 
@@ -74,12 +83,7 @@ def play_game():
 
     while True:
         # Get input
-        guess = get_guess()
-        if guess is None:
-            continue
-        if guess < 1 or guess > 100:
-            print("Please enter a number between 1 and 100!")
-            continue
+        guess = get_valid_guess()
 
         # Get the result of each round
         result = handle_round(guess, game_state)
@@ -87,18 +91,18 @@ def play_game():
         # Get remaining chance
         remaining_chance = get_remaining_chance(game_state)
 
-        # Win condiction
-        if result == "correct":
+        # 👉 WIN CONDITION
+        if is_win(result):
             show_summary(game_state)
             break
 
-        # Lose condition
-        if remaining_chance == 0:
+        # 👉 LOSE CONDITION
+        if is_game_over(game_state):
             show_game_over(game_state["number"])
             show_summary(game_state)
             break
 
-        show_chance(game_state)
+        show_chance(remaining_chance)
 
 def play_again():
     while True:
