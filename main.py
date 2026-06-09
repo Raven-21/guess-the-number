@@ -60,17 +60,11 @@ def handle_round(guess, game_state):
     # Check guess
     result = check_guess(guess, game_state)
 
-    # Check trying to win for the first time
-    is_first_try = (len(game_state["history"]) == 0)
-
     # Add history
     game_state["history"].append({
         "guess": guess,
         "result": result
     })
-
-    # Show result
-    show_result(result, is_first_try)
 
     return result
 
@@ -88,6 +82,11 @@ def play_game():
         # Get the result of each round
         result = handle_round(guess, game_state)
 
+        # Check trying to win for the first time
+        is_first_try = (len(game_state["history"]) == 1)
+
+        show_result(result, is_first_try)
+
         # Get remaining chance
         remaining_chance = get_remaining_chance(game_state)
 
@@ -97,7 +96,7 @@ def play_game():
             break
 
         # 👉 LOSE CONDITION
-        if is_game_over(game_state):
+        if is_game_over(remaining_chance):
             show_game_over(game_state["number"])
             show_summary(game_state)
             break
