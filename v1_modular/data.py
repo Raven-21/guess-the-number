@@ -10,6 +10,12 @@ def create_game_state(max_chance):
         "history": []
     }
 
+def add_history(game_state, guess, result):
+    game_state["history"].append({
+        "guess": guess,
+        "result": result
+    })
+
 def get_stats(game_state):
     stats = {"high": 0, "low": 0, "correct": 0}
 

@@ -1,7 +1,7 @@
 # -------------------------
 # Presentation Layer
 # -------------------------
-from data import get_stats
+from v1_modular.data import get_stats
 
 def show_result(result, is_first_try):
     if result == "high":

@@ -1,15 +1,16 @@
-from data import(
+from v1_modular.data import(
+    add_history,
     create_game_state,
     get_remaining_chance
 )
 
-from logic import (
+from v1_modular.logic import (
     check_guess,
     is_win,
     is_game_over
 )
 
-from ui import(
+from v1_modular.ui import(
     show_result,
     show_summary,
     show_chance,
@@ -61,10 +62,7 @@ def handle_round(guess, game_state):
     result = check_guess(guess, game_state)
 
     # Add history
-    game_state["history"].append({
-        "guess": guess,
-        "result": result
-    })
+    add_history(game_state, guess, result)
 
     return result
 

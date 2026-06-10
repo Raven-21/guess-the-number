@@ -1,7 +1,6 @@
 # -------------------------
 # Logic Layer
 # -------------------------
-from data import get_remaining_chance
 
 def check_guess(guess, game_state):
     if guess > game_state["number"]:
