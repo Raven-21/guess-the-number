@@ -1,21 +1,6 @@
-from v1_modular.data import(
-    add_history,
-    create_game_state,
-    get_remaining_chance
-)
+from v1_modular.data import create_game_state
 
-from v1_modular.logic import (
-    check_guess,
-    is_win,
-    is_game_over
-)
-
-from v1_modular.ui import(
-    show_result,
-    show_summary,
-    show_chance,
-    show_game_over
-)
+from v1_modular.game import process_round
 
 # -------------------------
 # Initialization
@@ -57,15 +42,6 @@ def get_valid_guess():
 # -------------------------
 # Control Layer
 # -------------------------
-def handle_round(guess, game_state):
-    # Check guess
-    result = check_guess(guess, game_state)
-
-    # Add history
-    add_history(game_state, guess, result)
-
-    return result
-
 def play_game():
     max_chance = choose_difficulty()
     game_state = create_game_state(max_chance)
@@ -77,29 +53,16 @@ def play_game():
         # Get input
         guess = get_valid_guess()
 
-        # Get the result of each round
-        result = handle_round(guess, game_state)
-
-        # Check trying to win for the first time
-        is_first_try = (len(game_state["history"]) == 1)
-
-        show_result(result, is_first_try)
-
-        # Get remaining chance
-        remaining_chance = get_remaining_chance(game_state)
+        # Get game result
+        status = process_round(guess, game_state)
 
         # 👉 WIN CONDITION
-        if is_win(result):
-            show_summary(game_state)
+        if status == "win":
             break
 
         # 👉 LOSE CONDITION
-        if is_game_over(remaining_chance):
-            show_game_over(game_state["number"])
-            show_summary(game_state)
+        if status == "lose":
             break
-
-        show_chance(remaining_chance)
 
 def play_again():
     while True:
