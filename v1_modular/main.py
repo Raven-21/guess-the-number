@@ -2,6 +2,13 @@ from v1_modular.data import create_game_state
 
 from v1_modular.game import process_round
 
+from v1_modular.ui import(
+    show_result,
+    show_summary,
+    show_chance,
+    show_game_over
+)
+
 # -------------------------
 # Initialization
 # -------------------------
@@ -40,7 +47,7 @@ def get_valid_guess():
         return guess
 
 # -------------------------
-# Control Layer
+# Orchestrator Layer
 # -------------------------
 def play_game():
     max_chance = choose_difficulty()
@@ -53,16 +60,23 @@ def play_game():
         # Get input
         guess = get_valid_guess()
 
-        # Get game result
-        status = process_round(guess, game_state)
+        # Get game data
+        data = process_round(guess, game_state)
+
+        show_result(data["result"], data["is_first_try"])
 
         # 👉 WIN CONDITION
-        if status == "win":
+        if data["status"] == "win":
+            show_summary(game_state)
             break
 
         # 👉 LOSE CONDITION
-        if status == "lose":
+        if data["status"] == "lose":
+            show_game_over(game_state["number"])
+            show_summary(game_state)
             break
+
+        show_chance(data["remaining_chance"])
 
 def play_again():
     while True:
