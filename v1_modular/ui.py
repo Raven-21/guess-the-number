@@ -9,7 +9,7 @@ def show_result(result, is_first_try):
     elif result == "low":
         print("Too low. ❌")
     else:
-        if is_first_try == 1:
+        if is_first_try:
             print("Unbelievable!!! 😮😮😮 You just guessed it right in 1 time! ✅")
         else:
             print("Congratulations! 😁😁😁 You guessed it right. ✅")

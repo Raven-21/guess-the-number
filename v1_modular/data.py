@@ -24,5 +24,8 @@ def get_stats(game_state):
 
     return stats
 
+def get_first_try(game_state):
+    return len(game_state["history"]) == 1
+
 def get_remaining_chance(game_state):
     return game_state["max_chance"] - len(game_state["history"])
