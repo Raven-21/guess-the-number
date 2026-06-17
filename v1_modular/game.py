@@ -3,7 +3,7 @@
 # -------------------------
 from v1_modular.data import (
     add_history,
-    get_first_try,
+    is_first_try,
     get_remaining_chance
 )
 
@@ -27,7 +27,7 @@ def process_round(guess, game_state):
     result = handle_round(guess, game_state)
 
     # Check if win for the first time
-    is_first_try = get_first_try(game_state)
+    first_try = is_first_try(game_state)
 
     # Get remaining chance
     remaining_chance = get_remaining_chance(game_state)
@@ -36,7 +36,7 @@ def process_round(guess, game_state):
     if is_win(result):
         return {
             "result": result,
-            "is_first_try": is_first_try,
+            "first_try": first_try,
             "remaining_chance": remaining_chance,
             "status": "win"
         }
@@ -44,14 +44,14 @@ def process_round(guess, game_state):
     if is_game_over(remaining_chance):
         return {
             "result": result,
-            "is_first_try": is_first_try,
+            "first_try": first_try,
             "remaining_chance": remaining_chance,
             "status": "lose"
         }
 
     return {
         "result": result,
-        "is_first_try": is_first_try,
+        "first_try": first_try,
         "remaining_chance": remaining_chance,
         "status": "continue"
     }

@@ -63,7 +63,7 @@ def play_game():
         # Get game data
         data = process_round(guess, game_state)
 
-        show_result(data["result"], data["is_first_try"])
+        show_result(data["result"], data["first_try"])
 
         # 👉 WIN CONDITION
         if data["status"] == "win":

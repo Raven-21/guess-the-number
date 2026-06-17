@@ -3,13 +3,13 @@
 # -------------------------
 from v1_modular.data import get_stats
 
-def show_result(result, is_first_try):
+def show_result(result, first_try):
     if result == "high":
         print("Too High. ❌")
     elif result == "low":
         print("Too low. ❌")
     else:
-        if is_first_try:
+        if first_try:
             print("Unbelievable!!! 😮😮😮 You just guessed it right in 1 time! ✅")
         else:
             print("Congratulations! 😁😁😁 You guessed it right. ✅")
