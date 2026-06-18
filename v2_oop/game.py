@@ -35,9 +35,26 @@ class Game:
         else:
             return "correct"
 
-game = Game(10)
+    def play_round(self, guess):
+        result = self.check_guess(guess)
 
-game.add_history(1, "low")
-game.add_history(10, "high")
+        self.add_history(guess, result)
 
-print(game.get_stats())
+        is_first_try = self.is_first_try()
+
+        remaining_chance = self.get_remaining_chance()
+
+        if result == "correct":
+            status = "win"
+        elif remaining_chance == 0:
+            status = "lose"
+        else:
+            status = "continue"
+
+
+        return {
+            "result": result,
+            "is_first_try": is_first_try,
+            "remaining_chance": remaining_chance,
+            "status": status
+        }
