@@ -8,11 +8,12 @@ This project started as a simple script and gradually evolved into a structured 
 
 The project is now organized into an object-oriented structure:
 
-* main.py → Application controller (game flow)
-* game.py → Game object, state management, and game logic
-* ui.py → User interface & output
+- main.py → Application controller (game flow)
+- game.py → Game object, state management, and game logic
+- ui.py → User interface & output
+- storage.py → File persistence and storage operations
 
-This marks the transition from a modular architecture to an object-oriented design.
+This architecture separates game logic, presentation, and persistence responsibilities.
 
 
 ## 📚 Project Evolution
@@ -50,6 +51,17 @@ A `Game` class now encapsulates:
 
 The previous `game_state` dictionary has been replaced by object attributes and methods.
 
+### V2.1 - Persistence Layer
+
+The project now supports file persistence through a dedicated storage layer.
+
+New components:
+
+- storage.py → file operations and data persistence
+- game_history.txt → saved game summaries
+
+Game results can now be stored after program execution, introducing basic persistence and file management concepts.
+
 
 ## ✨ Current Features
 
@@ -60,7 +72,9 @@ The previous `game_state` dictionary has been replaced by object attributes and 
 * Replay system
 * Object-oriented architecture
 * Encapsulated game state and logic
-
+* File persistence
+* Automatic game summary saving
+* Storage layer architecture
 
 ## 🧠 Key Design Concepts Practiced
 

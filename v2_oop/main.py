@@ -1,4 +1,5 @@
 from v2_oop.game import Game
+from v2_oop.storage import save_summary
 
 from v2_oop.ui import (
     show_result,
@@ -52,7 +53,7 @@ def play_game():
     game = Game(max_chance)
 
     print(f"You have {game.max_chance} chances. Good luck! 😉")
-    print(game.number)
+    #print(game.number)
 
     while True:
         # Get input
@@ -66,12 +67,14 @@ def play_game():
         # Win condition
         if data["status"] == "win":
             show_summary(game)
+            save_summary(game)
             break
 
         # Lose condition
         if data["status"] == "lose":
             show_game_over(game.number)
             show_summary(game)
+            save_summary(game)
             break
 
         show_chance(data["remaining_chance"])
