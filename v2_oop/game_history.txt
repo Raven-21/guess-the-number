@@ -6,3 +6,23 @@ Attempts: 5
 Answer: 83
 Attempts: 4
 
+=== GAME SUMMARY ===
+Answer: 32
+Attempts: 8
+
+=== GAME SUMMARY ===
+Answer: 30
+Attempts: 4
+
+=== GAME SUMMARY ===
+Answer: 87
+Attempts: 5
+
+=== GAME SUMMARY ===
+Answer: 20
+Attempts: 2
+
+=== GAME SUMMARY ===
+Answer: 50
+Attempts: 1
+

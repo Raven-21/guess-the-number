@@ -53,7 +53,9 @@ def play_game():
     game = Game(max_chance)
 
     print(f"You have {game.max_chance} chances. Good luck! 😉")
-    #print(game.number)
+
+    # Debug
+    #print(f"Debug: {game}")
 
     while True:
         # Get input
@@ -62,6 +64,10 @@ def play_game():
         # Get game data
         data = game.play_round(guess)
 
+        # Debug
+        #print(f"Debug: {game}")
+
+        # Show guess result
         show_result(data["result"], data["is_first_try"])
 
         # Win condition

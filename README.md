@@ -41,12 +41,16 @@ A `Game` class now encapsulates:
   * max_chance
   * history
 
+* Derived properties
+
+  * remaining_chance
+  * is_first_try
+
 * Game behaviors
 
-  * check_guess()
   * add_history()
   * get_stats()
-  * get_remaining_chance()
+  * check_guess()
   * play_round()
 
 The previous `game_state` dictionary has been replaced by object attributes and methods.
@@ -62,6 +66,7 @@ New components:
 
 Game results can now be stored after program execution, introducing basic persistence and file management concepts.
 
+### V2.2 - OOP Refinement
 
 ## ✨ Current Features
 
@@ -101,6 +106,18 @@ class Game:
 
 This allows game state and game behaviors to stay together in a single object.
 
+The Game class now includes both raw state and derived state.
+
+Raw state is stored directly inside the object:
+
+- number
+- max_chance
+- history
+
+Derived state is calculated dynamically through properties:
+
+- remaining_chance
+- is_first_try
 
 ### Encapsulation
 
@@ -113,7 +130,9 @@ game.play_round(guess)
 
 game.get_stats()
 
-game.get_remaining_chance()
+game.remaining_chance
+
+game.is_first_try
 ```
 
 Instead of passing a centralized state dictionary between multiple functions.

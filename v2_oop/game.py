@@ -7,6 +7,24 @@ class Game:
         self.max_chance = max_chance
         self.history = []
 
+    @property
+    def remaining_chance(self):
+        return self.max_chance - len(self.history)
+
+    @property
+    def is_first_try(self):
+        return len(self.history) == 1
+
+    def __str__(self):
+        return (
+            f"Game("
+            f"answer={self.number}, "
+            f"max_chance={self.max_chance}, "
+            f"attempts={len(self.history)}, "
+            f"remaining={self.remaining_chance}"
+            f")"
+        )
+
     def add_history(self, guess, result):
         self.history.append({
             "guess": guess,
@@ -21,12 +39,6 @@ class Game:
 
         return stats
 
-    def is_first_try(self):
-        return len(self.history) == 1
-
-    def get_remaining_chance(self):
-        return self.max_chance - len(self.history)
-
     def check_guess(self, guess):
         if guess > self.number:
             return "high"
@@ -40,21 +52,16 @@ class Game:
 
         self.add_history(guess, result)
 
-        is_first_try = self.is_first_try()
-
-        remaining_chance = self.get_remaining_chance()
-
         if result == "correct":
             status = "win"
-        elif remaining_chance == 0:
+        elif self.remaining_chance == 0:
             status = "lose"
         else:
             status = "continue"
 
-
         return {
             "result": result,
-            "is_first_try": is_first_try,
-            "remaining_chance": remaining_chance,
+            "is_first_try": self.is_first_try,
+            "remaining_chance": self.remaining_chance,
             "status": status
         }
