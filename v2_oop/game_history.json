@@ -1,0 +1,34 @@
+{
+    "number": 12,
+    "max_chance": 10,
+    "history": [
+        {
+            "guess": 50,
+            "result": "high"
+        },
+        {
+            "guess": 40,
+            "result": "high"
+        },
+        {
+            "guess": 30,
+            "result": "high"
+        },
+        {
+            "guess": 20,
+            "result": "high"
+        },
+        {
+            "guess": 10,
+            "result": "low"
+        },
+        {
+            "guess": 15,
+            "result": "high"
+        },
+        {
+            "guess": 12,
+            "result": "correct"
+        }
+    ]
+}
