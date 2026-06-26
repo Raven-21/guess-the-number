@@ -1,5 +1,5 @@
 from v2_oop.game import Game
-from v2_oop.storage import save_summary
+from v2_oop.storage import save_summary, load_game
 
 from v2_oop.ui import (
     show_result,
@@ -49,8 +49,10 @@ def get_valid_guess():
 # Orchestrator Layer
 # -------------------------
 def play_game():
-    max_chance = choose_difficulty()
-    game = Game(max_chance)
+    # max_chance = choose_difficulty()
+    # game = Game(max_chance)
+
+    game = load_game()
 
     print(f"You have {game.max_chance} chances. Good luck! 😉")
 

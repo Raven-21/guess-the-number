@@ -55,18 +55,18 @@ A `Game` class now encapsulates:
 
 The previous `game_state` dictionary has been replaced by object attributes and methods.
 
-### V2.1 - Persistence Layer
+### V2.1 - OOP Refinement
 
-The project now supports file persistence through a dedicated storage layer.
+### V2.2 - JSON Persistence
+
+The persistence layer has been upgraded from plain text to JSON-based storage.
 
 New components:
 
-- storage.py → file operations and data persistence
-- game_history.txt → saved game summaries
+- storage.py → save and load game state
+- game_history.json → structured game data
 
-Game results can now be stored after program execution, introducing basic persistence and file management concepts.
-
-### V2.2 - OOP Refinement
+The Game object can now be serialized into JSON and restored back into a Game instance.
 
 ## ✨ Current Features
 
@@ -80,6 +80,7 @@ Game results can now be stored after program execution, introducing basic persis
 * File persistence
 * Automatic game summary saving
 * Storage layer architecture
+* JSON-based game state storage
 
 ## 🧠 Key Design Concepts Practiced
 
@@ -152,6 +153,8 @@ Modular Design
 State-Driven Architecture
     ↓
 Object-Oriented Design
+    ↓
+JSON Persistence
 ```
 
 

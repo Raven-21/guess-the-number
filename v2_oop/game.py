@@ -2,10 +2,18 @@ import random
 
 class Game:
 
-    def __init__(self, max_chance):
-        self.number = random.randint(1, 100)
+    def __init__(self, max_chance, number=None, history=None):
+        if number is None:
+            self.number = random.randint(1, 100)
+        else:
+            self.number = number
+
         self.max_chance = max_chance
-        self.history = []
+        
+        if history is None:
+            self.history = []
+        else:
+            self.history = history
 
     @property
     def remaining_chance(self):

@@ -29,6 +29,18 @@
         {
             "guess": 12,
             "result": "correct"
+        },
+        {
+            "guess": 20,
+            "result": "high"
+        },
+        {
+            "guess": 50,
+            "result": "high"
+        },
+        {
+            "guess": 18,
+            "result": "high"
         }
     ]
 }
