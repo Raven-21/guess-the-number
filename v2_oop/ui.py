@@ -1,5 +1,5 @@
 # -------------------------
-# Presentation Layer
+# View
 # -------------------------
 def show_result(result, is_first_try):
     if result == "high":

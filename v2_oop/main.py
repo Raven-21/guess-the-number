@@ -1,3 +1,6 @@
+# -------------------------
+# Controller
+# -------------------------
 from v2_oop.game import Game
 from v2_oop.storage import save_summary, load_game
 
@@ -8,11 +11,7 @@ from v2_oop.ui import (
     show_game_over
 )
 
-# -------------------------
-# Initialization
-# -------------------------
 print("Welcome to Guess the Number! 😀😀😀")
-print("Please enter a number between 1 and 100.")
 
 def choose_difficulty():
     while True:
@@ -29,9 +28,9 @@ def choose_difficulty():
         else:
             print("\nPlease choose 1 or 2.")
 
-# -------------------------
-# Input Layer
-# -------------------------
+# ---------------
+# Input
+# ---------------
 def get_valid_guess():
     while True:
         try:
@@ -45,16 +44,12 @@ def get_valid_guess():
             continue
         return guess
 
-# -------------------------
-# Orchestrator Layer
-# -------------------------
-def play_game():
-    # max_chance = choose_difficulty()
-    # game = Game(max_chance)
-
-    game = load_game()
-
-    print(f"You have {game.max_chance} chances. Good luck! 😉")
+# ---------------
+# Orchestrator
+# ---------------
+def play_game(game):
+    print("Please enter a number between 1 and 100.")
+    print(f"You have {game.remaining_chance} chances. Good luck! 😉")
 
     # Debug
     #print(f"Debug: {game}")
@@ -87,22 +82,50 @@ def play_game():
 
         show_chance(data["remaining_chance"])
 
+def start_game():
+    while True:
+        choice = input(
+            "1. New Game\n"
+            "2. Load Game\n"
+            "3. Exit\n"
+            "Select: "
+        )
+
+        if choice == "1":
+            max_chance = choose_difficulty()
+            game = Game(max_chance)
+            play_game(game)
+            return True
+
+        elif choice == "2":
+            game = load_game()
+            play_game(game)
+            return True
+
+        elif choice == "3":
+            print("\nThank you for playing! Goodbye! 😀")
+            return False
+
+        else:
+            print("Please choose 1, 2, or 3.")
+
 def play_again():
     while True:
         choice = input("\nWould you like to play again? (y/n): ")
         if choice == "y":
             return True
         elif choice == "n":
-            print("\nThank you for playing! 😀")
+            print("\nThank you for playing! Goodbye! 😀")
             return False
         else:
             print("Please enter a yes or no!")
 
-# -------------------------
+# ---------------
 # Main Program
-# -------------------------
+# ---------------
 while True:
-    play_game()
+    if not start_game():
+        break
 
     if not play_again():
         break

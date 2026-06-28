@@ -1,17 +1,17 @@
 {
-    "number": 12,
-    "max_chance": 10,
+    "number": 19,
+    "max_chance": 5,
     "history": [
+        {
+            "guess": 10,
+            "result": "low"
+        },
         {
             "guess": 50,
             "result": "high"
         },
         {
-            "guess": 40,
-            "result": "high"
-        },
-        {
-            "guess": 30,
+            "guess": 62,
             "result": "high"
         },
         {
@@ -21,26 +21,6 @@
         {
             "guess": 10,
             "result": "low"
-        },
-        {
-            "guess": 15,
-            "result": "high"
-        },
-        {
-            "guess": 12,
-            "result": "correct"
-        },
-        {
-            "guess": 20,
-            "result": "high"
-        },
-        {
-            "guess": 50,
-            "result": "high"
-        },
-        {
-            "guess": 18,
-            "result": "high"
         }
     ]
 }
