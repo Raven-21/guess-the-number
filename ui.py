@@ -1,5 +1,5 @@
 # -------------------------
-# View
+# Presentation
 # -------------------------
 def show_result(result, is_first_try):
     if result == "high":
@@ -38,3 +38,9 @@ def show_chance(chance):
 def show_game_over(answer):
     print("Sorry! Game Over! 😥😥😥")
     print(f"The answer is {answer}.")
+
+def show_save_not_found():
+    print("No save file found. Starting a new game.")
+
+def show_save_file_broken():
+    print("Save file is corrupted. Starting a new game.")

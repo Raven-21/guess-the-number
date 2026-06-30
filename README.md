@@ -1,178 +1,167 @@
 # 🎮 Guess the Number
 
-A terminal-based number guessing game built while learning Python.
+## Introduction
 
-This project started as a simple script and gradually evolved into a structured software project through continuous refactoring, modular design, and object-oriented programming.
+A terminal-based number guessing game developed during my Python learning journey.
 
-## 🏗️ Current Architecture
+This project started as a simple script and gradually evolved into a small object-oriented application through continuous refactoring, modular design, JSON persistence, and exception handling.
 
-The project is now organized into an object-oriented structure:
+Rather than focusing only on game features, this project emphasizes software engineering practices, including code organization, object-oriented programming, separation of responsibilities, and maintainable project structure.
 
-- main.py → Application controller (game flow)
-- game.py → Game object, state management, and game logic
-- ui.py → User interface & output
-- storage.py → File persistence and storage operations
+## Demo
 
-This architecture separates game logic, presentation, and persistence responsibilities.
+![Main Menu](assets/main-menu.png)
+
+![Gameplay](assets/gameplay.png)
+
+![Game Summary](assets/game-summary.png)
+
+## ✨ Features
+
+- 🎯 Easy / Hard difficulty selection
+- 🔢 Guess history tracking
+- 📊 Guess statistics
+- 💾 Save and load game data using JSON
+- ⚠️ Exception handling for missing or corrupted save files
+- 🧩 Object-oriented game architecture
+- 🗂 Modular project structure
+- 🔄 Replay support
+
+## 📁 Project Structure
+
+```
+guess-the-number/
+│
+├── assets/
+│   ├── main-menu.png
+│   ├── gameplay.png
+│   └── game-summary.png
+│
+├── main.py       # Application controller & game flow
+├── game.py       # Game model and game logic
+├── ui.py         # Terminal user interface
+├── storage.py    # JSON persistence (save/load)
+│
+├── README.md
+├── .gitignore
+│
+└── old_versions/
+    └── v1_modular/
+```
+
+Each module has a clear responsibility, making the project easier to understand, maintain, and extend.
+
+The repository preserves the original modular implementation to demonstrate the project's evolution rather than only presenting the final version.
+
+## 🏗 Project Evolution
+
+This project gradually evolved through several refactoring stages:
+
+```
+Single Script
+        ↓
+Functions
+        ↓
+Modular Design
+        ↓
+State-Driven Architecture
+        ↓
+Object-Oriented Programming
+        ↓
+JSON Persistence
+        ↓
+Exception Handling
+```
+
+The project was continuously improved instead of being rewritten, allowing me to experience the complete evolution of a small software project.
 
 
-## 📚 Project Evolution
+## 🧠 Design Highlights
 
-### V1 - Modular Architecture
+### Object-Oriented Programming
 
-The project was organized into multiple layers:
+The project uses a dedicated `Game` class to encapsulate game state and behaviors.
 
-* data.py → Game state & data processing
-* logic.py → Game rules & decision logic
-* ui.py → User interface & output
-* main.py → Application controller
+The `Game` object manages:
 
-A centralized `game_state` dictionary was used to manage the entire game state.
+- random number generation
+- guess history
+- game statistics
+- remaining chances
+- round processing
 
-### V2 - Object-Oriented Architecture
+instead of relying on a centralized dictionary.
 
-The project was refactored into a class-based design.
-
-A `Game` class now encapsulates:
-
-* Game state
-
-  * number
-  * max_chance
-  * history
-
-* Derived properties
-
-  * remaining_chance
-  * is_first_try
-
-* Game behaviors
-
-  * add_history()
-  * get_stats()
-  * check_guess()
-  * play_round()
-
-The previous `game_state` dictionary has been replaced by object attributes and methods.
-
-### V2.1 - OOP Refinement
-
-### V2.2 - JSON Persistence
-
-The persistence layer has been upgraded from plain text to JSON-based storage.
-
-New components:
-
-- storage.py → save and load game state
-- game_history.json → structured game data
-
-The Game object can now be serialized into JSON and restored back into a Game instance.
-
-## ✨ Current Features
-
-* Difficulty selection (Easy / Hard)
-* Guess history tracking
-* Statistics system
-* Input validation
-* Replay system
-* Object-oriented architecture
-* Encapsulated game state and logic
-* File persistence
-* Automatic game summary saving
-* Storage layer architecture
-* JSON-based game state storage
-
-## 🧠 Key Design Concepts Practiced
 
 ### Separation of Concerns
 
-Each module has a clear responsibility:
+Each module has a single responsibility.
 
-* Game Layer → manages game state and game behaviors
-* UI Layer → handles presentation and output
-* Main Layer → controls application flow
+| Module | Responsibility |
+|---------|----------------|
+| `main.py` | Application flow |
+| `game.py` | Game state and business logic |
+| `ui.py` | User interface |
+| `storage.py` | Save and load game data |
 
-
-### Object-Oriented Programming (OOP)
-
-The project introduces a dedicated `Game` class:
-
-```python
-class Game:
-    def __init__(self, max_chance):
-        self.number = random.randint(1, 100)
-        self.max_chance = max_chance
-        self.history = []
-```
-
-This allows game state and game behaviors to stay together in a single object.
-
-The Game class now includes both raw state and derived state.
-
-Raw state is stored directly inside the object:
-
-- number
-- max_chance
-- history
-
-Derived state is calculated dynamically through properties:
-
-- remaining_chance
-- is_first_try
-
-### Encapsulation
-
-Game-related data and logic are encapsulated inside the `Game` class.
-
-Examples:
-
-```python
-game.play_round(guess)
-
-game.get_stats()
-
-game.remaining_chance
-
-game.is_first_try
-```
-
-Instead of passing a centralized state dictionary between multiple functions.
+This separation makes the code easier to maintain and extend.
 
 
-### Software Evolution
+### JSON Persistence
 
-This project demonstrates a gradual progression from:
+Game data is stored as JSON files.
 
-```text
-Single Script
-    ↓
-Functions
-    ↓
-Modular Design
-    ↓
-State-Driven Architecture
-    ↓
-Object-Oriented Design
-    ↓
-JSON Persistence
-```
+The project supports:
+
+- saving game summaries
+- loading previous game data
+- reconstructing a `Game` object from JSON
 
 
-## 🚀 Learning Goals
+### Exception Handling
 
-* Understand real-world project structure
-* Practice object-oriented programming in Python
-* Learn software architecture fundamentals
-* Improve code readability and maintainability
-* Transition from scripting → engineering mindset
+The project handles common file-related exceptions gracefully.
+
+Implemented exceptions include:
+
+- `FileNotFoundError`
+- `JSONDecodeError`
+
+Instead of crashing, the program provides appropriate feedback and creates a new game when necessary.
 
 
-## 📈 Next Steps
+## 🛠 Skills Demonstrated
 
-Planned improvements:
+This project helped me practice:
 
-* Further refinement of the `Game` class
-* Save/load game progress
-* Enhanced terminal UI
-* Multi-player support
-* Data persistence with files
+- Python fundamentals
+- Object-Oriented Programming (OOP)
+- Modular programming
+- File handling
+- JSON serialization
+- Exception handling
+- Code refactoring
+- Software architecture
+- API design
+- Separation of concerns
+
+
+## 🚀 Future Improvements
+
+Possible future enhancements include:
+
+- Save & Exit during gameplay
+- Continue unfinished games
+- Multiple save slots
+- Configuration file
+- Improved terminal UI
+- Better game statistics
+
+
+## 📚 Learning Outcome
+
+This project represents my first complete Python software project.
+
+Through continuous refactoring, I learned not only Python syntax but also how to gradually transform a simple script into a more structured and maintainable application.
+
+More importantly, I began to develop software engineering thinking, including object-oriented design, module responsibility, code organization, and project evolution.

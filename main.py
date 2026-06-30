@@ -1,14 +1,16 @@
 # -------------------------
 # Controller
 # -------------------------
-from v2_oop.game import Game
-from v2_oop.storage import save_summary, load_game
+from game import Game
+from storage import save_game, load_game
 
-from v2_oop.ui import (
+from ui import (
     show_result,
     show_summary,
     show_chance,
-    show_game_over
+    show_game_over,
+    show_save_not_found,
+    show_save_file_broken
 )
 
 print("Welcome to Guess the Number! 😀😀😀")
@@ -47,6 +49,43 @@ def get_valid_guess():
 # ---------------
 # Orchestrator
 # ---------------
+def start_game():
+    while True:
+        choice = input(
+            "1. New Game\n"
+            "2. Load Game\n"
+            "3. Exit\n"
+            "Select: "
+        )
+
+        if choice == "1":
+            max_chance = choose_difficulty()
+            game = Game(max_chance)
+            play_game(game)
+            return True
+
+        elif choice == "2":
+            game, status = load_game()
+
+            if status == "not_found":
+                show_save_not_found()
+            elif status == "json_error":
+                show_save_file_broken()
+
+            if game is None:
+                max_chance = choose_difficulty()
+                game = Game(max_chance)
+
+            play_game(game)
+            return True
+
+        elif choice == "3":
+            print("\nThank you for playing! Goodbye! 😀")
+            return False
+
+        else:
+            print("Please choose 1, 2, or 3.")
+
 def play_game(game):
     print("Please enter a number between 1 and 100.")
     print(f"You have {game.remaining_chance} chances. Good luck! 😉")
@@ -70,44 +109,17 @@ def play_game(game):
         # Win condition
         if data["status"] == "win":
             show_summary(game)
-            save_summary(game)
+            save_game(game)
             break
 
         # Lose condition
         if data["status"] == "lose":
             show_game_over(game.number)
             show_summary(game)
-            save_summary(game)
+            save_game(game)
             break
 
         show_chance(data["remaining_chance"])
-
-def start_game():
-    while True:
-        choice = input(
-            "1. New Game\n"
-            "2. Load Game\n"
-            "3. Exit\n"
-            "Select: "
-        )
-
-        if choice == "1":
-            max_chance = choose_difficulty()
-            game = Game(max_chance)
-            play_game(game)
-            return True
-
-        elif choice == "2":
-            game = load_game()
-            play_game(game)
-            return True
-
-        elif choice == "3":
-            print("\nThank you for playing! Goodbye! 😀")
-            return False
-
-        else:
-            print("Please choose 1, 2, or 3.")
 
 def play_again():
     while True:
